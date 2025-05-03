@@ -1,7 +1,8 @@
-package com.example.security.controller;
+package com.example.app.controller;
 
-import com.example.security.dto.AuthRequest;
-import com.example.security.dto.AuthResponse;
+import com.example.common.constants.ApiConstants;
+import com.example.common.dto.AuthRequest;
+import com.example.common.dto.AuthResponse;
 import com.example.security.service.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping(ApiConstants.ENDPOINT_AUTH)
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -34,10 +35,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                request.getUsername(),
-                request.getPassword()
-            )
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
         );
 
         UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
@@ -45,4 +46,4 @@ public class AuthController {
 
         return ResponseEntity.ok(new AuthResponse(token));
     }
-} 
+}
