@@ -1,8 +1,6 @@
 package com.example.app.exception;
 
 import com.example.common.constants.ErrorConstants;
-import com.example.common.exception.BaseException;
-import com.example.common.exception.SecurityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,4 +1,4 @@
-package com.example.common.exception;
+package com.example.app.exception;
 
 public class SecurityException extends RuntimeException {
     private final String errorCode;
