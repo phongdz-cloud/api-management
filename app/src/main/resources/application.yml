@@ -10,21 +10,36 @@ spring:
     username: postgres
     password: 123456
     driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 20000 # 20000ms (20 giây) - thời gian tối đa để chờ kết nối
+      maximum-pool-size: 10 # 0 - số lượng kết nối tối đa trong pool
+      minimum-idle: 5 # 0 - số lượng kết nối tối thiểu trong pool
+      idle-timeout: 300000 # 300000ms (5 phút) - thời gian tối đa kết nối không được sử dụng
+      max-lifetime: 1200000 # 1200000ms (20 phút) - thời gian tối đa kết nối có thể được sử dụng
+      auto-commit: true # tự động commit khi có transaction
+      pool-name: HikariCP-Blog # tên pool
+      connection-test-query: SELECT 1 # query kiểm tra kết nối
+      connection-init-sql: SELECT 1 # query khởi tạo kết nối
 
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: update # update schema khi có thay đổi
+    show-sql: true # log sql
     properties:
       hibernate:
-        format_sql: false
+        format_sql: true # format sql
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC # thời gian zone
+        connection:
+          provider_disables_autocommit: false # tự động commit khi có transaction
+    open-in-view: false # không mở view khi có transaction
 
 logging:
   level:
     org:
       hibernate:
-        SQL: DEBUG
+        SQL: DEBUG # log sql
         type:
           descriptor:
             sql:
@@ -32,6 +47,7 @@ logging:
     springframework: INFO
     com:
       example: DEBUG
+    com.zaxxer.hikari: DEBUG # log hikari
 
 management:
   endpoints:
@@ -53,5 +69,4 @@ jwt:
   expiration: 86400000 # 24 hours in milliseconds
   refresh-token:
     expiration: 604800000 # 7 days in milliseconds
-
 
