@@ -1,6 +1,7 @@
 package com.example.app.exception;
 
 import com.example.common.constants.ErrorConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(SecurityException.class)
@@ -66,6 +68,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleGlobalException(Exception ex) {
+        log.error("Error message {}", ex.getMessage(),ex);
         Map<String, String> response = new HashMap<>();
         response.put("errorCode", ErrorConstants.INTERNAL_SERVER_ERROR);
         response.put("errorMessage", "An unexpected error occurred");

@@ -1,4 +1,4 @@
-package com.example.service.config;
+package com.example.biz.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

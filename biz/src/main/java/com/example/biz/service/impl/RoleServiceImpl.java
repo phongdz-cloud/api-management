@@ -1,7 +1,7 @@
-package com.example.service.impl;
+package com.example.biz.service.impl;
 
+import com.example.biz.service.IRoleService;
 import com.example.core.repository.IRoleRepository;
-import com.example.service.IRoleService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;

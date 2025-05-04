@@ -27,7 +27,7 @@ spring:
     show-sql: true # log sql
     properties:
       hibernate:
-        format_sql: true # format sql
+        format_sql: false # format sql
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc:
           time_zone: UTC # thời gian zone
